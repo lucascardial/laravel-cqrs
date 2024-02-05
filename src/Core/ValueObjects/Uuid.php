@@ -13,5 +13,19 @@ class Uuid
         if ($uuid === null) {
             $this->uuid = RamseyUuid::uuid4()->toString();
         }
+
+        if (!RamseyUuid::isValid($this->uuid)) {
+            throw new \InvalidArgumentException('Invalid UUID');
+        }
+    }
+
+    public static function from(string $uuid): Uuid
+    {
+        return new self($uuid);
+    }
+
+    public function __toString(): string
+    {
+        return $this->uuid;
     }
 }
